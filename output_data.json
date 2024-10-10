@@ -1,0 +1,98 @@
+{
+    "object_0": {
+        "filename": "object_0.png",
+        "box": {
+            "xmin": 794,
+            "ymin": 187,
+            "xmax": 1364,
+            "ymax": 889
+        },
+        "score": 0.9992892742156982,
+        "label": 1,
+        "label_name": "person"
+    },
+    "object_1": {
+        "filename": "object_1.png",
+        "box": {
+            "xmin": 481,
+            "ymin": 319,
+            "xmax": 862,
+            "ymax": 800
+        },
+        "score": 0.9978030323982239,
+        "label": 1,
+        "label_name": "person"
+    },
+    "object_2": {
+        "filename": "object_2.png",
+        "box": {
+            "xmin": 1784,
+            "ymin": 488,
+            "xmax": 1920,
+            "ymax": 1062
+        },
+        "score": 0.8744675517082214,
+        "label": 82,
+        "label_name": "unknown"
+    },
+    "object_3": {
+        "filename": "object_3.png",
+        "box": {
+            "xmin": 612,
+            "ymin": 33,
+            "xmax": 938,
+            "ymax": 351
+        },
+        "score": 0.8177638649940491,
+        "label": 4,
+        "label_name": "motorcycle"
+    },
+    "object_4": {
+        "filename": "object_4.png",
+        "box": {
+            "xmin": 242,
+            "ymin": 617,
+            "xmax": 597,
+            "ymax": 944
+        },
+        "score": 0.8125476837158203,
+        "label": 31,
+        "label_name": "skis"
+    },
+    "object_5": {
+        "filename": "object_5.png",
+        "box": {
+            "xmin": 30,
+            "ymin": 722,
+            "xmax": 1414,
+            "ymax": 1073
+        },
+        "score": 0.7342999577522278,
+        "label": 67,
+        "label_name": "keyboard"
+    },
+    "object_6": {
+        "filename": "object_6.png",
+        "box": {
+            "xmin": 789,
+            "ymin": 31,
+            "xmax": 957,
+            "ymax": 136
+        },
+        "score": 0.7028607726097107,
+        "label": 3,
+        "label_name": "car"
+    },
+    "object_7": {
+        "filename": "object_7.png",
+        "box": {
+            "xmin": 356,
+            "ymin": 780,
+            "xmax": 1375,
+            "ymax": 975
+        },
+        "score": 0.5134948492050171,
+        "label": 67,
+        "label_name": "keyboard"
+    }
+}
