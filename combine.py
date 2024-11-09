@@ -8,6 +8,7 @@ VIDEO_NAME = os.path.basename(BASE_DIR)
 # 假设从文本文件加载对话
 dialogue_file_path = os.path.join(BASE_DIR, f'{VIDEO_NAME}.srt')
 gaze_events_json_path = os.path.join(BASE_DIR, f'{VIDEO_NAME}_gaze_events.json')
+output_json_path = os.path.join(BASE_DIR, f'{VIDEO_NAME}_result.json')  # 输出 JSON 文件路径
 
 with open(gaze_events_json_path, 'r') as f:
     gaze_events = json.load(f)
@@ -60,15 +61,22 @@ def match_gaze_events_with_dialogue(gaze_events, dialogue_lines):
         start_seconds = parse_timestamp(start_time)
         end_seconds = parse_timestamp(end_time)
 
+        dialogue_entry = {
+            "start_time": start_time,
+            "end_time": end_time,
+            "text": dialogue['text'],
+            "gaze_events": []
+        }
+
         # 依次检查 gaze_events 是否在当前对话的时间范围内
         while gaze_event_idx < len(gaze_events) and gaze_events[gaze_event_idx] <= end_seconds:
             event_time = gaze_events[gaze_event_idx]
             if start_seconds <= event_time <= end_seconds:
-                output.append(f"eye_contact_time: {event_time}, dialogue: {dialogue['text']}")
+                dialogue_entry['gaze_events'].append(event_time)
             gaze_event_idx += 1
 
         # 无论是否有匹配的 gaze_events，都输出当前的对话
-        output.append(f"dialogue: {dialogue['text']}")
+        output.append(dialogue_entry)
 
     return output
 
@@ -78,6 +86,8 @@ dialogue_lines = parse_dialogue_file(dialogue_file_path)
 # 运行匹配函数，按时间线输出
 output = match_gaze_events_with_dialogue(gaze_events, dialogue_lines)
 
-# 打印最终结果
-for line in output:
-    print(line)
+# 将最终结果保存到 JSON 文件中
+with open(output_json_path, 'w') as f:
+    json.dump(output, f, indent=4)
+
+print(f"结果已成功保存到 {output_json_path}")
