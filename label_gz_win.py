@@ -136,9 +136,10 @@ def main():
     global annotations, csv_path, root
 
     # 视频和标注初始化
-    video_path = "dataset/3-gaze.mp4"
+    video_path = "/home/weiyan/Desktop/Dataset_mp4/Piaget - Object permanence failure (Sensorimotor Stage).mp4"
     video_name = os.path.splitext(os.path.basename(video_path))[0]
-    csv_path = f"{video_name}_annotations.csv"
+    csv_path = f"/home/weiyan/Desktop/Dataset_mp4/{video_name}/{video_name}_annotations.csv"
+    video_name = os.path.splitext(os.path.basename(video_path))[0]+'-gaze'
     load_annotations()
     
     cap = cv2.VideoCapture(video_path)
