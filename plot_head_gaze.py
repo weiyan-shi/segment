@@ -8,7 +8,7 @@ import numpy as np
 import cv2
 import random
 
-BASE_DIR = os.getenv('BASE_DIR', '/app/Desktop/Dataset/3')
+BASE_DIR = os.getenv('BASE_DIR', '/app/Desktop/dataset-weiyan-latest-gaze-26/Clip 5 A not B error')
 VIDEO_NAME = os.path.basename(BASE_DIR)
 
 # 定义线段与矩形相交的函数
@@ -108,17 +108,28 @@ for frame_idx, frame_file in enumerate(frame_files):
                         print(f"{person_id} 的视线打在了 {other_person_id} 的头上！")
 
                         # 检查是否 person_0 看 person_1 或 person_1 看 person_0
-                        if person_id == 'person_0' and other_person_id == 'person_1':
+                        if person_id == 'person_1' and other_person_id == 'person_2':
                             person0_looking_at_person1 = True
-                        elif person_id == 'person_1' and other_person_id == 'person_0':
+                            gaze_events.append({
+                            "frame_time": frame_time,
+                            "event": "person_1_looking_at_person_2"
+                            })
+                        elif person_id == 'person_2' and other_person_id == 'person_1':
                             person1_looking_at_person0 = True
+                            gaze_events.append({
+                            "frame_time": frame_time,
+                            "event": "person_2_looking_at_person_1"
+                            })
 
             except Exception as e:
                 print(f"Error processing person {person_id} in frame {frame_number}: {e}")
 
         # 检查是否有相互注视事件
         if person0_looking_at_person1 and person1_looking_at_person0:
-            gaze_events.append(frame_time)
+            gaze_events.append({
+                "frame_time": frame_time,
+                "event": "mutual_gaze"
+            })
 
 
         # 保存修改后的图像
@@ -128,7 +139,7 @@ for frame_idx, frame_file in enumerate(frame_files):
     except Exception as e:
         print(f"Error processing frame {frame_file}: {e}")
 
-gaze_events = sorted(gaze_events)
+gaze_events = sorted(gaze_events, key=lambda x: x["frame_time"])
 
 # 保存注视事件到JSON文件
 gaze_events_json_path = os.path.join(BASE_DIR, f'{VIDEO_NAME}_gaze_events.json')
